@@ -1,0 +1,28 @@
+hydra:
+  run:
+    dir: ./outputs/${dataset}/${mode}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+local_rank: 0
+world_size: 1
+
+run: 0
+dataset: MNIST_bin
+binary: 
+data_dir: ../datasets/
+model_dir: ./models/
+log_dir: ./logs/
+
+batch_size: 24
+n_epochs: 3001
+lr: 1e-4
+gen_num_samples: 100
+gen_batch_size: 10
+
+mode: train
+num_res_blocks: 4
+weave_attn: True
+
+loadpath: 
+
+defaults:
+  - override hydra/job_logging: custom

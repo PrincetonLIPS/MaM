@@ -1,0 +1,75 @@
+hydra:
+  run:
+    dir: ./outputs/molecule_property_design/${L}D/${objective}/${model}_MC:${logp_mc}/${mode}/${now:%Y-%m-%d}/${now:%H-%M-%S}-tar${target_value}-temp${tau}
+
+local_rank: 0
+world_size: 1
+
+run: 0
+dataset: molecule
+n_train: 100000 # for loading pseudo dataset that is not used for training with KL divergence
+n_val: 20000
+n_test: 20000
+data_dir: ../datasets/
+load_full: false
+model_dir: ./models/
+log_dir: ./logs/
+gen_dir: ./samples/${dataset}/dm/${string_type}-${string_example}/target${target_value}-tau${tau}/${start}-${end}/
+
+string_type: SELFIES
+metric_name: logP
+start: 4
+end: 20
+target_value: -4.0
+tau: 0.1
+
+model: MAM
+alphabet: 
+K: 
+L: 55
+LogZ: 
+
+# training
+objective: KL
+logp_mc: false
+gibbs_steps: 4
+batch_size: 4096
+n_epochs: 200
+save_every: 300
+eval_every: 5
+lr: 5e-4
+zlr: 5e-2
+clip_grad: -1
+plot_samples: True
+plot_every: 5
+
+# testing/evaluation
+test_batch_size: 512
+generate_batch_size: 400
+gen_num_samples: 2000
+eval_reverse_kl: False
+eval:
+  mc_ll: 1
+  num_batches: 10
+
+mode: train
+alpha: 4
+gen_order: random
+arch: mlp_dual
+nn:
+  n_layers: 4
+  hidden_dim: 4096
+  with_ln: False
+  res: True
+
+save_model: False
+load_model: False
+loadpath: # load trained model for testing and evaluation
+
+# for conditional generation
+conditional: True
+string_example: "c1ccccc1"
+corrupt_indices: 4
+
+defaults:
+  - override hydra/job_logging: custom

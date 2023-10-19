@@ -1,0 +1,1 @@
+BIT_UNKNOWN_VAL = 0

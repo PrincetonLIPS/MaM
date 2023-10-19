@@ -1,0 +1,26 @@
+hydra:
+  run:
+    dir: ./outputs/${dataset}/${mode}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+local_rank: 0
+world_size: 1
+
+run: 0
+dataset: TEXT8
+data_dir: ../datasets/
+model_dir: ./models/
+log_dir: ./logs/
+
+batch_size: 16
+n_epochs: 14001
+lr: 5e-4
+
+seqlen: 250
+
+mode: train
+arch: Transformer
+
+loadpath: 
+
+defaults:
+  - override hydra/job_logging: custom

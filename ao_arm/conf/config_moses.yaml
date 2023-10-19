@@ -1,0 +1,30 @@
+hydra:
+  run:
+    dir: ./outputs/${dataset}/${mode}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+local_rank: 0
+world_size: 1
+
+run: 0
+dataset: MOSES
+string_type: SMILES
+load_full: True
+data_dir: ../datasets/
+model_dir: ./models/
+log_dir: ./logs/
+
+alphabet: None
+K: None
+L: None
+
+batch_size: 180
+n_epochs: 201
+lr: 5e-4
+
+mode: train
+arch: Transformer
+
+loadpath:
+
+defaults:
+  - override hydra/job_logging: custom

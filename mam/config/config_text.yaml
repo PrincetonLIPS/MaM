@@ -1,0 +1,46 @@
+hydra:
+  run:
+    dir: ./outputs/${dataset}/${mode}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+local_rank: 0
+world_size: 1
+
+run: 0
+dataset: TEXT8
+seqlen: 250
+data_dir: ../datasets/
+model_dir: ./models/
+log_dir: ./logs/
+
+L: 250
+K: 27 # characters + space
+
+# training
+batch_size: 512
+n_epochs: 200
+lr: 5e-4
+zlr: 5e-2
+clip_grad: 0.25
+
+# evaluation
+test_batch_size: 16
+gen_num_samples: 128
+mask_steps: [50, 100, 150, 200]
+eval:
+  mc_ll: 5
+  num_batches: 10
+  threshold: 10.0
+
+mode: train
+include_onpolicy: True
+gibbs_steps: 4
+gen_order: random
+arch: transformer
+
+save_model: False
+load_pretrain: True
+loadpath_pretrain: #should be set to the trained conditionals from ao_arm
+loadpath: # should be set to the trained marginalization models when doing testing and evaluation
+
+defaults:
+  - override hydra/job_logging: custom

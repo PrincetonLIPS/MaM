@@ -1,0 +1,13 @@
+# ignore all pyache
+*.pyc
+# ignore all .DS_Store
+.DS_Store
+#ignore datasets folder
+datasets/
+# ignore dataset
+*.tar.gz
+# ignore folders in outputs
+ao_arm/outputs/
+mam/outputs/
+# ignore virtualenv
+env/

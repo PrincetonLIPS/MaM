@@ -1,0 +1,54 @@
+hydra:
+  run:
+    dir: ./outputs/${dataset}/${string_type}/${mode}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+local_rank: 0
+world_size: 1
+
+run: 0
+dataset: MOSES
+string_type: SMILES
+load_full: False
+data_dir: ../datasets/
+gen_dir: ./samples/${data}/${string_type}-${string_example}/
+model_dir: ./models/
+log_dir: ./logs/
+
+alphabet: None
+K: None
+L: None
+
+# training
+batch_size: 2048
+n_epochs: 200
+lr: 5e-4
+zlr: 5e-2
+clip_grad: 0.25
+
+# evaluation
+test_batch_size: 100
+generate_batch_size: 400
+eval_num_samples: 400
+eval:
+  mc_ll: 1
+  num_batches: 10
+  threshold: 2.0
+
+mode: train
+include_onpolicy: True
+gibbs_steps: 4
+gen_order: random
+arch: transformer
+
+save_model: False
+load_pretrain: True
+loadpath_pretrain: #should be set to the trained conditionals from ao_arm
+loadpath: # should be set to the trained marginalization models when doing testing and evaluation
+
+# for conditional generation
+conditional: True
+string_example: "c1cc(O)ccc1"
+corrupt_indices: 4
+
+defaults:
+  - override hydra/job_logging: custom

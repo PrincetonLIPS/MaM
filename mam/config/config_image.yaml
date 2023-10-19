@@ -1,0 +1,51 @@
+hydra:
+  run:
+    dir: ./outputs/${dataset}/${mode}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+local_rank: 0
+world_size: 1
+
+run: 0
+dataset: MNIST_bin
+binary: True
+data_dir: ../datasets/
+model_dir: ./models/
+log_dir: ./logs/
+
+L: 
+K: 2 
+
+#training
+batch_size: 32
+n_epochs: 200
+lr: 1e-4
+zlr: 5e-2
+clip_grad: 100.0
+
+# testing/evaluation
+test_batch_size: 32
+generate_batch_size: 10
+eval_num_samples: 32
+conditional: True
+mask_steps: [100, 400, 700]
+eval:
+  mc_ll: 5
+  num_batches: 10
+  threshold: 5.0
+
+mode: train
+include_onpolicy: True
+gibbs_steps: 4
+mar_bl_loss_only: True
+gen_order: random
+arch: unet
+weave_attn: True
+num_res_blocks: 4
+
+save_model: False
+load_pretrain: True
+loadpath_pretrain: #should be set to the trained conditionals from ao_arm
+loadpath: # should be set to the trained marginalization models when doing testing and evaluation
+
+defaults:
+  - override hydra/job_logging: custom

@@ -1,0 +1,67 @@
+hydra:
+  run:
+    dir: ./outputs/ising_${ising_model.dim}d/${objective}/${mode}/${model}_MC:${logp_mc}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+local_rank: 0
+world_size: 1
+
+run: 0
+dataset: ising
+n_train: 100000 # for loading pseudo dataset that is not used for training with KL divergence
+n_val: 20000
+n_test: 20000
+data_dir: ../datasets/
+model_dir: ./models/
+log_dir: ./logs/
+
+ising_model:
+  sigma: 0.1
+  bias: 0.2
+  dim: 10
+  n_samples: 2000
+  gt_steps: 1000000
+
+model: MAM
+LogZ: 
+K: 2
+L: None
+
+# training
+objective: KL
+logp_mc: False
+gibbs_steps: 4
+batch_size: 512
+n_epochs: 200
+eval_every: 5
+save_every: 200
+plot_samples: True
+plot_every: 5
+lr: 5e-4
+zlr: 5e-2
+clip_grad: -1
+
+# testing/evaluation
+test_batch_size: 512
+gen_num_samples: 2000
+eval_reverse_kl: True
+eval:
+  mc_ll: 1
+  num_batches: 10
+
+mode: train
+alpha: 4
+gen_order: random
+arch: mlp_dual
+nn:
+  layers: 2048-2048-2048
+  n_layers: 4
+  hidden_dim: 2048
+  with_ln: False
+  res: True
+
+save_model: False
+load_model: False
+loadpath: # load trained model for testing and evaluation
+
+defaults:
+  - override hydra/job_logging: custom

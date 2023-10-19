@@ -1,0 +1,14 @@
+scipy
+torch>=1.10.0
+torchvision
+hydra-core==1.2.0
+wandb
+omegaconf
+selfies
+tensorboardx
+rdkit
+seaborn
+matplotlib
+tqdm
+molsets
+igraph
