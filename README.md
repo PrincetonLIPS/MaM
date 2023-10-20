@@ -1,6 +1,6 @@
 # Generative Marginalization Models
 
-This repository contains the official PyTorch implementaion for the paper: **Generative Marginalization Models** [[paper link](tbd)], by [Sulin Liu](https://liusulin.github.io/), [Peter J. Ramadge](https://ece.princeton.edu/people/peter-j-ramadge), and [Ryan P. Adams](https://www.cs.princeton.edu/~rpa/).
+This repository contains the official PyTorch implementaion for the paper: **Generative Marginalization Models** [[paper link](https://arxiv.org/abs/2310.12920)], by [Sulin Liu](https://liusulin.github.io/), [Peter J. Ramadge](https://ece.princeton.edu/people/peter-j-ramadge), and [Ryan P. Adams](https://www.cs.princeton.edu/~rpa/).
 
 We introduce **marginalization models** (MaMs), a new family of generative models for high-dimensional discrete data. 
 
@@ -111,8 +111,8 @@ Please check the paper for technical details and experimental results. Please co
 ```
 @article{liu2023mam,
   title={Generative Marginalization Models},
-  author={Sulin Liu, Peter J. Ramadge, Ryan P. Adams},
-  journal={arXiv preprint xxxxxxx},
+  author={Liu, Sulin and Ramadge, Peter J and Adams, Ryan P},
+  journal={arXiv preprint arXiv:2310.12920},
   year={2023}
 }
 ```
