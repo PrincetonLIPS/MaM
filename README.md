@@ -56,8 +56,6 @@ $$
 \end{align*}
 $$
 
-Coming soon: code and model checkpoints for more image datasets including CIFAR-10 and Imagenet-32.
-
 For the most efficient training, the marginals can be learned in two-steps:
 
 **1. Fit the conditionals $\phi$**: maximize the log-likelihood following the objective for training AO-ARMs.
@@ -86,6 +84,7 @@ python image_main.py load_pretrain=True # MNIST-Binary
 python text_main.py load_pretrain=True # text8
 python mol_main.py load_pretrain=True # MOSES molecule string
 ```
+Coming soon: code and model checkpoints for more image datasets including CIFAR-10 and Imagenet-32.
 
 ## Energy-based training problems
 In this setting, we do not have data samples from the distribution of interest. Instead, we have access to evaluate the unnormalized (log) probability mass function $f$ , usually in the form of reward function or energy function, that are defined by humans or by physical systems to specify how likely a sample is. The goal is to match the learned distribution $p_\theta(x)$ to the given desired probability $f(x)$ so that we can sample from $f(x)$ efficiently with a generative model. It is commonly encountered in modeling the thermodynamic equilibrium ensemble of physical systems [[4](https://www.science.org/doi/10.1126/science.aaw1147)] and goal-driven generative design problems with reward functions [[5](https://arxiv.org/abs/2106.04399)].
