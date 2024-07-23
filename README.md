@@ -56,6 +56,8 @@ $$
 \end{align*}
 $$
 
+Coming soon: code and model checkpoints for more image datasets including CIFAR-10 and Imagenet-32.
+
 For the most efficient training, the marginals can be learned in two-steps:
 
 **1. Fit the conditionals $\phi$**: maximize the log-likelihood following the objective for training AO-ARMs.
